@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 插值与表达式</title>
+		<!-- 通过CDN文件引入vue，自动识别最新稳定版本 -->
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- {{name}} -->
+			{{date}}
+			<br />
+			<span v-html="link"></span>
+			<br />
+			<!-- 使用v-pre 可跳过编译过程，显示 {{}} 标签  -->
+			<span v-pre>{{name}}</span>
+			<br />
+			<span>{{name}}</span>
+			<br />
+			<!-- 在 {{}} 中可以使用js表达式进行简单运算，不支持语句和流程控制 -->
+			{{number / 10}}
+			<br />
+			{{isOK?'确定':'取消'}}
+			<br />
+			{{text.split(',').reverse().join(',')}}
+		</div>
+
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					name: '聊城',
+					date: new Date().toLocaleString(),
+					link: '<a href="#">这是一个链接</a>',
+					number: 100,
+					isOK: false,
+					text: '123,456'
+				},
+				mounted: function() {
+					// 声明一个变量指向Vue实例this，保证作用域一致
+					var _this = this;
+					// 设置定时器，配置定时频率
+					this.timer = setInterval(function() {
+						// 修改数据date
+						_this.date = new Date().toLocaleString()
+					}, 1000);
+				},
+				beforeDestroy: function() {
+					if (this.timer) {
+						// 在Vue实例销毁前，清除定时器
+						clearInterval(this.timer)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

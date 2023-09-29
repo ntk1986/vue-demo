@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 示例</title>
+		<!-- 通过CDN文件引入vue，自动识别最新稳定版本 -->
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="book in books">{{book.name}}</li>
+			</ul>
+		</div>
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					books: [{
+							name: 'tom'
+						},
+						{
+							name: 'jack'
+						},
+						{
+							name: 'lucy'
+						}
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

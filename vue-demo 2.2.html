@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 指令与事件</title>
+		<!-- 通过CDN文件引入vue，自动识别最新稳定版本 -->
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p v-if="show">显示本段文字</p>
+			<br />
+			<!-- v-bind 用法：动态更新HTML元素上的属性，比如id、class、url、src等。 -->
+			<!-- <a v-bind:href='url'>这是一个链接</a> -->
+			<br />
+			<!-- <img v-bind:src='imgUrl' /> -->
+			<br />
+			<!-- v-on 用法：用来绑定事件监听器 -->
+			<button v-on:click='handleClose'>点击隐藏</button>
+		</div>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					show: true,
+					url: 'https://www.github.com',
+					imgUrl: 'http://img.daimg.com/uploads/allimg/210114/1-210114151951.jpg'
+				},
+				methods: {
+					handleClose: function() {
+						this.show = false;
+					},
+					init: function(text) {
+						console.log(text);
+					}
+				},
+				mounted: function() {
+					this.init('在初始化时调用');
+				}
+			})
+
+			app.init('在Vue外部调用');
+		</script>
+	</body>
+</html>
