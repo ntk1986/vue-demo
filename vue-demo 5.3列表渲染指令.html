@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue 列表渲染指令v-for</title>
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- ***************************************** 5.3.1 v-for 基本用法 *************************************** -->
+			<ul>
+				<li v-for='book in books'>{{book.name}}</li>
+			</ul>
+			<br />
+			<!-- v-for也可以用在内置标签<template>上，将多个元素进行渲染 -->
+			<ul>
+				<template v-for='book in books'>
+					<li>书名：{{book.name}}</li>
+					<li>作者：{{book.author}}</li>
+				</template>
+			</ul>
+			<br />
+			<!-- 除了数组外，对象的属性也可以遍历 -->
+			<ul>
+				<li v-for='value in user'>{{value}}</li>
+			</ul>
+			<!-- 遍历对象时，有两个可选参数（key，index），value key index先后顺序是固定的，不能变 -->
+			<ul>
+				<li v-for='(value,key,index) in user'>{{index}} - {{key}} : {{value}}</li>
+			</ul>
+			<!-- v-for 可以迭代整数 -->
+			<ul>
+				<li v-for='i in 3'>{{i}}</li>
+			</ul>
+
+			<!-- ***************************************** 5.3.2 数组更新 *************************************** -->
+			<button @click='push2books'>添加书籍</button>
+			<br />
+			<button @click='filterAndReplace'>过滤并替换</button>
+			<br />
+			<!-- ***************************************** 5.3.3 过滤与排序 *************************************** -->
+			<ul>
+				<template v-for='book in filterBooks'>
+					<li>书名：{{book.name}}</li>
+					<li>作者：{{book.author}}</li>
+				</template>
+			</ul>
+			<ul>
+				<template v-for='book in sortedBooks'>
+					<li>书名：{{book.name}}</li>
+					<li>作者：{{book.author}}</li>
+				</template>
+			</ul>
+		</div>
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					user: {
+						name: '金庸',
+						gender: '男',
+						age: 18
+					},
+					books: [{
+							name: '铁血丹心',
+							author: '金庸'
+						},
+						{
+							name: '东邪西毒',
+							author: '查良庸'
+						},
+						{
+							name: '华山论剑',
+							author: 'jinyong'
+						}
+					]
+				},
+				methods: {
+					push2books: function() {
+						this.books.push({
+							name: '雪山飞狐',
+							author: '渣渣庸'
+						});
+					},
+					filterAndReplace: function() {
+						this.books = this.books.filter(function(book) {
+							return book.name.match(/山/);
+						})
+					}
+				},
+				computed: {
+					filterBooks: function() {
+						return this.books.filter(function(book) {
+							return book.name.includes('山');
+						})
+					},
+					// 按照书名字典顺序排序
+					sortedBooks: function() {
+						return this.books.sort(function(a, b) {
+							var x = a.name.toLowerCase();
+							var y = b.name.toLowerCase();
+							if (x < y) {
+								return -1;
+							}
+							if (x > y) {
+								return 1;
+							}
+
+							return 0;
+
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

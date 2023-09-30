@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- ***************************************** 5.2.1 v-if/v-else-if/v-else *************************************** -->
+			<!-- v-else-if 要紧跟v-if，v-else 要紧跟 v-else-if 或 v-if。表达式的值为true时，当前元素/组件及所有子节点将被渲染；为false时被移除 。-->
+			<p v-if="status === 1">当status为1时显示该行</p>
+			<p v-else-if="status === 2">当status为2时显示该行</p>
+			<p v-else>否则显示该行</p>
+			<br />
+			<!-- 如果一次判断的是多个元素，可以在Vue.js内置的<template>元素上使用条件指令，最终渲染的结果不会包含该元素。 -->
+			<template v-if="status === 1">
+				<p>这是第一个p</p>
+				<p>这是第二个p</p>
+				<p>这是第三个p</p>
+			</template>
+			<br />
+			<!-- Vue在渲染元素时，出于效率考虑，会尽可能的复用已有元素而非重新渲染。 -->
+			<!-- 输入内容后，点击‘切换输入类型’按钮，DOM变了，但是输入框里面的内容没有变，说明<input>元素被复用了 -->
+			<template v-if="type === 'name'">
+				<label>用户名：</label>
+				<input placeholder="输入用户名" />
+			</template>
+			<template v-else>
+				<label>邮箱：</label>
+				<input placeholder="输入邮箱" />
+			</template>
+			<button @click="handleToggleClick">切换输入类型</button>
+			<br />
+			<!-- 给两个<input>元素都增加key属性后，就不会复用了，切换类型时键入的内容也会被删除，不过<lable>元素仍然会被复用 -->
+			<!-- 注意：**********key的内容必须是唯一的！！！********** -->
+			<template v-if="type2 === 'name'">
+				<label>用户名：</label>
+				<input placeholder="输入用户名" key='name-input'/>
+			</template>
+			<template v-else>
+				<label>邮箱：</label>
+				<input placeholder="输入邮箱" key='mail-input'/>
+			</template>
+			<button @click="handleToggleClick2">切换输入类型</button>
+			<br />
+			
+			<!-- *************************************** 5.2.2 v-show ***************************************** -->
+			<!-- v-show 是改变CSS属性display，为true时 style 添加 display:none;。 -->
+			<!-- v-show 不能在<template>上使用 -->
+			<p v-show='status === 1'>当status = 1时显示该行</p>
+			
+		</div>
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					status: 1,
+					type: 'name',
+					type2: 'name'
+				},
+				methods: {
+					handleToggleClick: function() {
+						this.type = this.type === 'name' ? 'mail' : 'name';
+					},
+					handleToggleClick2: function() {
+						this.type2 = this.type2 === 'name' ? 'mail' : 'name';
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
