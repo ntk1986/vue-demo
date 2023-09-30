@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 什么是计算属性</title>
+    <script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+<!--    {{text.split(',').reverse().join(',')}}-->
+<!--  计算属性  -->
+    {{reverseText}}
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            text: '123,456'
+        },
+        // 计算属性：表达式过长，或逻辑复杂，使用计算逻辑实现。
+        computed: {
+            reverseText: function () {
+                return this.text.split(',').reverse().join(',');
+            }
+        }
+    })
+</script>
+</body>
+</html>
