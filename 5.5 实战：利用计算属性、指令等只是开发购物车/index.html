@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>购物车示例</title>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<!-- v-cloak:解决初始化慢导致页面闪动的问题，工程化的项目里面，项目的HTML结构只有一个孔的div元素，剩余的内容都是用路由挂载不同组件完成，不再需要v-cloak。 -->
+		<div id="app" v-cloak>
+			<template v-if='list.length'>
+				<table>
+					<thead>
+						<tr>
+							<th>
+								<input type="checkbox" v-model='selectAllChecked' />全选
+							</th>
+							<th></th>
+							<th>商品名称</th>
+							<th>商品单价</th>
+							<th>购买数量</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for='(item,index) in list'>
+							<td><input type="checkbox" v-model='pickedList' :value='index' /></td>
+							<td>{{ index + 1 }}</td>
+							<td>{{ item.name }}</td>
+							<td>{{ item.price }}</td>
+							<td>
+								<!-- :disabled - v-bind:disable，当数量为1时禁用button -->
+								<button @click='handleReduce(index)' :disabled='item.count === 1'>-</button>
+								{{ item.count }}
+								<button @click='handleAdd(index)'>+</button>
+							</td>
+							<td><button @click='handleRemove(index)'>移除</button></td>
+						</tr>
+					</tbody>
+				</table>
+				<p>是否全选：{{selectAllChecked}}</p>
+				<p>选中项：{{pickedList}}</p>
+				<div>选中总价：￥{{selectedMoney}}</div>
+			</template>
+			<template v-else>购物车为空</template>
+		</div>
+		<!-- 注意：这里将vue.min.js和index.js文件写在body最底部，如果写在head里面，Vue实例将无法创建，因为此时DOM还没有被解析完成。 -->
+		<!-- 引入Vue类库 -->
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<!-- 引入自定义js文件，包含Vue实例及业务代码 -->
+		<script src="index.js"></script>
+	</body>
+</html>

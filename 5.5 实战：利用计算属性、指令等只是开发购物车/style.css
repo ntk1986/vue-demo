@@ -1,0 +1,68 @@
+[v-cloak] {
+	display: none;
+}
+
+table {
+	/* 表格外框设置：线宽、实线、颜色 */
+	border: 1px solid #e9e9e9;
+	/* 
+		border-collapse CSS 属性是用来决定表格的边框是分开的还是合并的。
+		在分隔模式下，相邻的单元格都拥有独立的边框。
+		在合并模式下，相邻单元格共享边框。
+	 */
+	border-collapse: collapse;
+	/* border-spacing 属性指定相邻单元格边框之间的距离（该属性只适用于 border-collapse 值是 separate 的时候。 ） */
+	border-spacing: 0;
+	/* 
+		CSS 中 empty-cells 属性定义了用户端 user agent 应该怎么来渲染表格 <table> 中没有可见内容的单元格的边框和背景。
+		只有当 border-collapse 属性值是 separate 时，才会生效。
+	 */
+	empty-cells: show;
+}
+
+th,
+td {
+	/* 
+		padding 控制元素所有四条边的内边距区域。
+		一个元素的内边距区域指的是其内容与其边框之间的空间。
+		https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding
+	 */
+	/* 上下8px,左右16px */
+	padding: 8px 16px;
+	/* 设置每个单元格的 线宽、实线、颜色 */
+	border: 1px solid #e9e9e9;
+	/* 
+		text-align 设置块元素或者单元格框的行内内容的水平对齐。
+		这意味着其效果和 vertical-align 类似，但是是水平方向的。
+	 */
+	text-align: left;
+}
+
+th {
+	/* 
+		background 是一种 CSS 简写属性，用于一次性集中定义各种背景属性，
+		包括 color, image, origin 与 size, repeat 方式等等。
+	 */
+	background: #f7f7f7;
+	/* color 属性设置元素的文本以及文本装饰的前景色颜色值，并设置 currentcolor 值。 */
+	color: #5c6b77;
+	/* 
+		font-weight 指定了字体的粗细程度。
+		一些字体只提供 normal 和 bold 两种值。 
+	 */
+	font-weight: 600;
+	/* 
+		white-space 属性用于设置如何处理元素内的空白字符 
+		这个属性指定了两件事：
+			1 空白字符是否合并，以及如何合并。
+			2 是否换行，以及如何换行。
+		https://developer.mozilla.org/zh-CN/docs/Web/CSS/white-space
+	*/
+	/* 
+		normal
+			连续的空白符会被合并。源码中的换行符会被当作空白符来处理。并根据填充行框盒子的需要来换行。
+		nowrap
+			和 normal 一样合并空白符，但阻止源码中的文本换行。
+	 */
+	white-space: nowrap;
+}
