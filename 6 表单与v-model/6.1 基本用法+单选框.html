@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 输入的内容实时映射到绑定的数据上。 -->
+			<input type="text" v-model='message' />
+			<p>输入的内容：{{message}}</p>
+			<br />
+			<textarea v-model='text' placeholder="输入..."></textarea>
+			<p>输入的内容是：</p>
+			<p style="white-space: pre;">{{text}}</p>
+			<br />
+			<!-- 输入实时更新，包括中文输入法的拼音 -->
+			<input type="text" @input='handleInput' placeholder="输入..." />
+			<p>输入的内容是：{{message}}</p>
+			<br />
+			<!-- 单选按钮，单独使用时不需要v-model进行数据绑定，直接v-bind绑定一个data，然后操控data就可以实现选中与取消的功能 -->
+			<input type="radio" :checked='picked1' />
+			<p>单选按钮</p>
+			<!-- 如果组合使用，实现互斥选择的效果，就需要v-model配合value来使用 -->
+			<input type='radio' v-model='picked' value='html' id='html'/>
+			<label for='html'>HTML</label>
+			<br />
+			<input type='radio' v-model='picked' value='js' id='js'/>
+			<label for='js'>JS</label>
+			<br />
+			<input type='radio' v-model='picked' value='css' id='css'/>
+			<label for='css'>CSS</label>
+			<br />
+			<p>选择的项是：{{picked}}</p>
+			<br />
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: '',
+					text: '',
+					picked1: false,
+					picked:'js'
+				},
+				methods: {
+					handleInput: function(e) {
+						this.message = e.target.value;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

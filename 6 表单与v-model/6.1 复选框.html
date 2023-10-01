@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 单个复选框 -->
+			<input type='checkbox' v-model='checked1' id="checked1"/>
+			<label for='checked1'>选择状态：{{checked1}}</label>
+			<br />
+			<br />
+			<br />
+			<!-- 多个复选框，v-model + value -->
+			<input type="checkbox" v-model='checked2' value='html' id='html'/>
+			<label for="html">HTML</label>
+			<br />
+			<input type="checkbox" v-model='checked2' value='js' id='js'/>
+			<label for="js">JS</label>
+			<br />
+			<input type="checkbox" v-model='checked2' value='css' id='css'/>
+			<label for="css">CSS</label>
+			<br />
+			<p>选中的复选框：{{checked2}}</p>
+		</div>
+		
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			var app = new Vue({
+				el:'#app',
+				data:{
+					checked1:false,
+					checked2:['js']
+				}
+			})
+		</script>
+	</body>
+</html>

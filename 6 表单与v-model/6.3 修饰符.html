@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- .lazy ： v-model转变为在change事件中同步数据，默认是在input事件中同步输入框数据 -->
+			<!-- 
+				input事件：输入框实时改变。
+				change事件：输入框失焦或按回车。
+			 -->
+			<input type="text" v-model.lazy='message' />
+			<p>.lazy: {{message}}</p>
+			<br />
+			<br />
+			<br />
+			<!-- .number : 可以将输入类型转换为Number类型，否则虽然输入的是数字，类型其实是string。在数字输入框时比较有用。 -->
+			<!-- <input type="number" v-model='message2'/> -->
+			<input type="number" v-model.number='message2'/>
+			<p>{{ typeof message2 }}</p>
+			<br />
+			<br />
+
+			<!-- .trim : 自动过滤输入的首尾空格。 -->
+			<!-- <input type="text" v-model='message3'/> -->
+			<input type="text" v-model.trim='message3'/>
+			<p>result:{{message3}}</p>
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: '',
+					message2:123,
+					message3:''
+				}
+			})
+		</script>
+	</body>
+</html>
