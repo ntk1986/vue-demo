@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<input v-model='parentMsg'/>
+			<my-component message='来自父组件的数据' msg='斧王' warning-text='HTML不区分大小写' :active-msg='parentMsg'></my-component>
+		
+			<!-- 如果直接传递数字、布尔值、数组、对象，而不适用v-bind，传递的仅仅是字符串 -->
+			<my-component2 message='[1,2,3]'></my-component2>
+			<my-component2 :message='[1,2,3]'></my-component2>
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			Vue.component('my-component', {
+				// props，可以是数组，也可以是对象
+				// props用来接收父组件的数据。
+				// HTML不区分大小写，props中的 驼峰命名 在DOM模板中要转为 短横分隔命名
+				props: ['message','msg','warningText','activeMsg'],
+				template: '<div>{{message}} - {{msg}} <br /> {{warningText}}<br />  {{activeMsg}}</div>'
+			})
+			
+			Vue.component('my-component2',{
+				props:['message'],
+				template:'<div>{{message.length}}</div>'
+			})
+
+			var app = new Vue({
+				el: '#app',
+				data:{
+					parentMsg:''
+				}
+			})
+		</script>
+
+	</body>
+</html>

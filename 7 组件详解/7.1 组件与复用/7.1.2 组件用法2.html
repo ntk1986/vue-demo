@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 组件使用data -->
+			<my-component></my-component>
+			<br />
+			<br />
+			<br />
+			<!-- **************************************** -->
+			<!-- 组件复用 -->
+			<p>1 JavaScript对象是引用关系，所以如果return出的对象引用了外部的一个对象，那这个对象就是共享的，
+				任何一方修改都会同步</p>
+			<my-component2></my-component2>
+			<my-component2></my-component2>
+			<my-component2></my-component2>
+			<br />
+			<br />
+			<my-component3></my-component3>
+			<my-component3></my-component3>
+			<my-component3></my-component3>
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			Vue.component('my-component', {
+				template: '<div>组件使用data：{{message}}</div>',
+				// 除了template以外，组件还可以像实例那样使用其他选项，比如data、computed、methods等。
+				// 和Vue实例不同，组件在使用data时，data必须是函数，然后将数据return出去。
+				data: function() {
+					return {
+						message: 1
+					}
+				}
+			})
+			// *********************************************
+			var data = {
+				counter: 0
+			};
+
+			Vue.component('my-component2', {
+				template: '<button @click="counter++">{{ counter }}</button>',
+				data: function() {
+					// 组件data返回了外部对象，当该组件复用时，会共享一个外部对象。
+					return data;
+				}
+			})
+
+			Vue.component('my-component3', {
+				template: '<button @click="counter++">{{ counter }}</button>',
+				data: function() {
+					// 在这里可以从后端读取数据后，返回后端保存的状态，实现业务功能。
+					return {
+						counter: 0
+					};
+				}
+			})
+
+			var app = new Vue({
+				el: '#app'
+			})
+		</script>
+	</body>
+</html>

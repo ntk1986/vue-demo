@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<p>message : {{message}}</p>
+			<component-a></component-a>
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			// bus实例，用于组件间传递事件，保存初始化内容等
+			var bus = new Vue()
+
+			Vue.component('component-a', {
+				template: '<button @click="handleEvent">传递事件</button>',
+				methods: {
+					handleEvent: function() {
+						var date = new Date;
+						bus.$emit('on-message', '组件component-a - ' + date);
+					}
+				}
+			})
+
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: ''
+				},
+				mounted: function() {
+					var _this = this;
+					// 初始化时监听来自bus实例的事件
+					bus.$on('on-message', function(msg) {
+						_this.message = msg;
+					})
+				}
+			})
+		</script>
+	</body>
+</html>

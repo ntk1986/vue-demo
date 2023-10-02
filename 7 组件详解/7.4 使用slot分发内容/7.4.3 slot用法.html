@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<child-component>
+				<!-- 				<p>分发的内容</p>
+				<p>更多分发的内容</p> -->
+			</child-component>
+
+			<!-- 具名slot -->
+			<child-component2>
+				<h2 slot="header">标题</h2>
+				<p>正文内容</p>
+				<p>更多的正文内容</p>
+				<div slot="footer">底部信息</div>
+			</child-component2>
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			Vue.component('child-component', {
+				template: '\
+				<div>\
+					<slot>\
+						<p>如果父组件没有插入内容，我将作为默认内容出现</p>\
+					</slot>\
+				</div>'
+			})
+
+			// 具名slot
+			Vue.component('child-component2', {
+				template: '\
+				<div class="container">\
+					<div class="header">\
+						<slot name="header"></slot>\
+					</div>\
+					<div class="main">\
+						<slot></slot>\
+					</div>\
+					<div class="footer">\
+						<slot name="footer"></slot>\
+					</div>\
+				</div>'
+			})
+
+			var app = new Vue({
+				el: '#app'
+			})
+		</script>
+	</body>
+</html>

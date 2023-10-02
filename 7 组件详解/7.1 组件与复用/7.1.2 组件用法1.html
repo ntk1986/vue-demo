@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<my-component></my-component>
+			<!-- 局部组件，只能在所属Vue实例作用域内使用。 -->
+			<my-component2></my-component2>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div id="app2">
+			<my-component></my-component>
+			<!-- 局部组件，只能在所属Vue实例作用域内使用。 -->
+			<my-component2></my-component2>
+			<br />
+			<br />
+			<br />
+			<!-- 组件使用限制
+				Vue组件模板在某些情况下会收到HTML的限制，比如<table>内规定只允许是<tr>/<td>、<th>等
+				这些表格元素，所以在<table>内直接使用组件是无效的。这种情况下，可以使用特殊的 is 属性
+				来挂载组件。
+				常见的限制元素还有:<ul>、<ol>、<select>。
+				
+				注意：如果使用的是字符串模板，是不受限制的，比如.vue单文件用法等。
+			 -->
+			<table>
+				<!-- tbody在渲染时，会被替换为组件的内容。 -->
+				<tbody is='my-component'></tbody>
+			</table>
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			// 全局注册组件
+			Vue.component('my-component', {
+				// template的DOM结构必须被一个元素包含，否则无法渲染。
+				template: '<div><a href="#">全局 component!!!</a></div>'
+			})
+
+			var app = new Vue({
+				el: '#app',
+				// 局部注册组件，只能在当前实例作用域内使用。
+				components: {
+					'my-component2': {
+						template: '<a href="#">局部 component!!!</a>'
+					}
+				}
+			})
+			var app2 = new Vue({
+				el: '#app2'
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<p>total:{{total}}</p>
+			<p>second:{{secondData}}</p>
+			<my-component @increase='handleGetTotal' @decrease='handleGetTotal'></my-component>
+		</div>
+
+		<script src="https://unpkg.com/vue@2.7.14/dist/vue.min.js"></script>
+		<script>
+			Vue.component('my-component', {
+				props: [],
+				template: '\
+				<div> \
+					<button @click="handleIncrease">+1</button>\
+					<button @click="handleDecrease">-1</button>\
+				</div>',
+				data: function() {
+					return {
+						counter: 0
+					};
+				},
+				methods: {
+					handleIncrease: function() {
+						this.counter++;
+						// 自定义事件，第一个参数是事件名称，
+						// 第二个参数是传递的数据，可以不填或填写多个
+						// 当传递多个数据的时候，父组件监听事件触发的函数相应接收多个数据
+						this.$emit('increase', this.counter, 2);
+					},
+					handleDecrease: function() {
+						this.counter--;
+						this.$emit('decrease', this.counter, 3);
+					}
+				}
+			})
+
+			var app = new Vue({
+				el: '#app',
+				data: {
+					total: 0,
+					secondData: 0
+				},
+				methods: {
+					handleGetTotal: function(value, value2) {
+						this.total = value;
+						this.secondData = value2
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
