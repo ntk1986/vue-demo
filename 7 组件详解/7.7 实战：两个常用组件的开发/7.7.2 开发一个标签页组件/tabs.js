@@ -31,7 +31,7 @@ Vue.component('tabs', {
 			return [
 				'tabs-tab',
 				{
-					'tabs-tab-active': item.name === this.currentValue;
+					'tabs-tab-active': item.name === this.currentValue
 				}
 			]
 		},
