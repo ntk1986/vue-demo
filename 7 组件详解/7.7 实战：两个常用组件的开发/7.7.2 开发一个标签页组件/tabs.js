@@ -23,6 +23,7 @@ Vue.component('tabs', {
     data: function () {
         return {
             currentValue: this.value,
+            //用于存放所有子组件对应的标题。
             navList: []
         }
     },

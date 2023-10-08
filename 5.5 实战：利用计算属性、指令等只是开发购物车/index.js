@@ -22,7 +22,8 @@ var app = new Vue({
 			}
 		],
 		pickedList: [],
-		selectAllChecked: false
+		selectAllChecked: false,
+		selectAll: [0, 1, 2]
 	},
 	computed: {
 		selectedMoney: function() {
@@ -33,7 +34,6 @@ var app = new Vue({
 			}
 			return selectedMoney;
 		}
-
 	},
 	methods: {
 		handleReduce: function(index) {
